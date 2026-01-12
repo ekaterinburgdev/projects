@@ -17,11 +17,12 @@ function Home({ projectsData, isWidgetVersion = false }) {
 }
 
 export async function getStaticProps() {
+  const projectsData = await getAllRepoStats();
   return {
     props: {
-      projectsData: await getAllRepoStats()
+      projectsData: JSON.parse(JSON.stringify(projectsData))
     },
-  }
+  };
 }
 
 export default Home;

@@ -23,9 +23,11 @@ export default function Widget({ projectsData }) {
 }
 
 export async function getStaticProps() {
+  const projectsData = await getAllRepoStats();
+
   return {
     props: {
-      projectsData: await getAllRepoStats()
+      projectsData: JSON.parse(JSON.stringify(projectsData))
     },
   }
 }

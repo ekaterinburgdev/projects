@@ -1,21 +1,9 @@
 import styles from "./Slots.module.css";
-import { Loading } from "../Loading/Loading";
-import { useSlots } from "./useSlots";
 import TimeAgo from "../TimeAgo";
 import { isDeadBranch } from "../usecases/metrics";
 
-const DEFAULT_BRANCH_NAME = "main";
-
-export function DeadBranchesSlots({ project, vercel }) {
-  const { loaded, items } = useSlots({
-    project,
-    loadItems: (repo) => loadBranches(repo, vercel),
-  });
-
-  const filterDead = (item) => isDeadBranch(item.date);
-  const branches = items.filter(filterDead);
-
-  if (!loaded) return <Loading />;
+export function DeadBranchesSlots({ project }) {
+  const branches = (project.branches || []).filter((item) => isDeadBranch(item.date));
 
   if (!branches.length) return <p>No dead branches</p>;
 
@@ -41,7 +29,15 @@ export function DeadBranchesSlots({ project, vercel }) {
               {branch}, <TimeAgo date={date} />
             </a>
 
-            {slotUrl && <a href={slotUrl} target="_blank" rel="noreferrer" className={styles.slot__preview} aria-label="Branch preview"></a>}
+            {slotUrl && (
+              <a 
+                href={slotUrl} 
+                target="_blank" 
+                rel="noreferrer" 
+                className={styles.slot__preview} 
+                aria-label="Branch preview"
+              ></a>
+            )}
 
             <div className={styles.slot__info}>
               {commitAuthor && (
@@ -68,10 +64,4 @@ export function DeadBranchesSlots({ project, vercel }) {
       )}
     </ul>
   );
-}
-
-async function loadBranches(repo, vercel) {
-  const response = await fetch(`/api/branches?repo=${repo}&vercel=${vercel}`);
-
-  return await response.json();
 }
