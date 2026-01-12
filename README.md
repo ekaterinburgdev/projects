@@ -36,7 +36,7 @@ The project data is edited in the [projects.config.js](https://github.com/ekater
 1. Add `.env.local` with [GitHub Access Token](https://github.com/settings/tokens) for GitHub with `scope` with access to `repo` permission
 
 ```
-GITHUB_TOKEN=<github-access-token>
+GH_TOKEN=<github-access-token>
 ```
 
 2. Install [Node.js](https://nodejs.org/en/download/) and [pnpm](https://www.npmjs.com/package/pnpm#user-content-install)

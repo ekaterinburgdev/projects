@@ -4,7 +4,7 @@ import projectsConfig from "../projects.config";
 const GITHUB_BOT_AUTHOR = "web-flow";
 
 const octokit = new Octokit({
-  auth: process.env.GITHUB_TOKEN,
+  auth: process.env.GH_TOKEN,
 });
 
 const owner = projectsConfig.organization;

@@ -2,7 +2,7 @@ import { Octokit } from "octokit";
 import projectsConfig from "../projects.config";
 
 const octokit = new Octokit({
-  auth: process.env.GITHUB_TOKEN,
+  auth: process.env.GH_TOKEN,
 });
 
 export default async function getIssues(repo) {

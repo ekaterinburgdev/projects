@@ -21,7 +21,6 @@ export async function getStaticProps() {
     props: {
       projectsData: await getAllRepoStats()
     },
-    revalidate: 3600,
   }
 }
 
